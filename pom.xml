@@ -35,19 +35,27 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
 		<dependency>
+    		<groupId>com.nimbusds</groupId>
+    		<artifactId>nimbus-jose-jwt</artifactId>
+    		<version>9.47</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+		<dependency>
+    		<groupId>org.modelmapper</groupId>
+    		<artifactId>modelmapper</artifactId>
+    		<version>3.2.2</version>
+		</dependency>
+
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-r2dbc</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -57,6 +65,10 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>r2dbc-postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
 		<dependency>

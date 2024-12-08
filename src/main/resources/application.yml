@@ -1,0 +1,72 @@
+# spring:
+#   security:
+#     oauth2:
+#       client:
+#         registration:
+#           google:
+#             client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
+#             client-secret: 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
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google-login:
+            provider: google
+            client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
+            client-secret: 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
+
+# jwt:
+#   config:
+#     enabled: true
+#     jwk-set:
+#       url: "http://localhost:8002/.well-known/jwks.json"
+#       issuer: "STOCKWISE"
+
+access:
+  token:
+    expiry:
+      in:
+        ms: 7200000
+        
+refresh:
+  token:
+    expiry:
+      in:
+        ms: 86400000
+
+
+stockwise:
+  jwk:
+    set:
+      private:
+        key: |
+          -----BEGIN PRIVATE KEY-----
+          MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCuJ67Dg6dUZr5j
+          7EiIo0Ef6pXrU8Cb07O2J1xYF0ElRvLnnOVWeEjNjD0wmhAwzmX0Cib7iUT/cFca
+          PA42l8OW7L11szjVovQc0v84CYVgmESVOrjY82aXZ+fbcziFGQpb4A59LNAxtN4G
+          3wn+cWXY1KNHrJOI7GWq4YGLKVnPkBdNp7vKfFJ1eQ2yMwUgayV71/aRFy02Z3ho
+          86CfZd9nb7owVxRUpcXZ0nEDzrFX5Sm6xQ7JEu/q91hmzgxu0NLxtBkNgzyA0bPS
+          pnC8T9RvfRP/6TTk3m892Rj7snDyx/n1wY/i9yFu+wM+zUb+kjH8py1zV1S7Lci0
+          kqQ1HZj7AgMBAAECggEAQnSCC7lBMMPEAv028GzbfQJXEuVyqgOun+OFKVg2U7Mv
+          HZKRMN3VahoJf3JKm1UnMmhtV66Z1Z9YnXotMkfXKtBLu44YMe1smVMqcIexjZqN
+          ESTHRIIcs8nCf8sH1kIn4cctwDZJe644ywZxGdbLtmHtrHv+EFGkugAzHpc43irM
+          Uj3ukD4grYRIW/7jrRbYm4A5qo2RQdKrM3HOR/KYCfmfsH4EoOwdtxdPU8Q00qDL
+          5qPTeoPavfaq73hwJM8lVNFfSn67AkYSFpnweJqO7dp2jaPjZ8+nP2S985bliZwP
+          1G2ZIRBgSkZ2MgeVm467Nn0LjzyhpPtEhv/a/4n3gQKBgQDfdfWmVRApJygEepPe
+          oNKak+agsldZVzcoe7QmLAt7CGB2/gwXSHRF26XXeNmwNTQYbFPigx8MnzrkjEK4
+          NhSCOP8LiGAZeFnkRnYwyeP4YFsXjhSfejc5UY7oIIbxen0zxQ7mlPHeZBkVTpc6
+          Vu6UBn0BRzfy4yNM2viMt3SzdwKBgQDHg7s/aDCIgtdyCdnKKdPGgCy8yDyDS2mB
+          Kgs2YP/7QTu2uhinO9kRkTQ7alO/4MqiLquKocMwa9L20igT4ZueJwgNEi26CPLF
+          Q1f6T6rXOSFJLZZ/WWyVla/uG/rsYioVdVnp2cw//Dx/yUCeEOj+YQiTO5k7LGxU
+          2GkZTHj/nQKBgGV461PczLnjTgi6oOs3nGsVPmU6lu+66xE3G1c6KPx1kVh3hIYO
+          IL6YP3bZKgEaJ83vYyg44qCYreWay7Fa3XVE7IwQIZNvU2KVnJYLF7pyButrWXIR
+          zYH5xyshmiWNuc0IbvvGJw8V5U4HoiSb1Trit2EdNgrVmfIMfVFo/VWBAoGAMTuE
+          fUUMlOMUnwNnRsfDhnwijgMrS4rUYhcp5SVShYG3ZoPNiZbvHbKjHPZD7FlgJ100
+          32TDcbNpv5ZkZWOKryAakH8n4XxLy/muQApgsfNbD1+8f3hlnxPs8ejdpm8iy2DF
+          6zrfd/qaQz46P8cUd5EiOJLAYSW5JcaxSJjiUtECgYAEadtEYdM7vVlqypLTGRlh
+          M6ZK+BJ1aonH3PTbqdZ9buM99K3b1nnEnC2TqZzycXPkTGeE2YrtUpKpaBIIjIZw
+          olJyZn2eYexGQ9AojqoEpOo4G1WTsQj4E0nqrIodRZNSO+sO1xkJF+sLBnEA9iJP
+          lxDjeYYBWVgB3flA9Nv8DA==
+          -----END PRIVATE KEY-----
