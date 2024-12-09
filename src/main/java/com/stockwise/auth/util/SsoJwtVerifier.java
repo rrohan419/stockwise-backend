@@ -24,7 +24,7 @@ import com.stockwise.auth.enums.Provider;
 @RequiredArgsConstructor
 public class SsoJwtVerifier {
     
-    @Qualifier("googleJwkSet")
+    @Qualifier("googlwJwkSet")
 	private final JWKSet googleJwkSet;
 
     private final Mapper mapper;

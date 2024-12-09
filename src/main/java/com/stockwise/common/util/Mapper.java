@@ -3,7 +3,9 @@ package com.stockwise.common.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.modelmapper.ConfigurationException;
 import org.modelmapper.MappingException;
@@ -11,6 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stockwise.common.constant.ExceptionMessage;
@@ -57,5 +61,16 @@ public class Mapper {
 		} catch (IOException ex) {
 			throw new CustomException(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+    public Map<String, String> convertStringToHashMap(String jsonString) {
+		Map<String, String> map = new HashMap<>();
+		try {
+			map = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {
+			});
+		} catch (JsonProcessingException ex) {
+			throw new CustomException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return map;
 	}
 }

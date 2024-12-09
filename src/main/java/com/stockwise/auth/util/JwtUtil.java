@@ -1,12 +1,19 @@
 package com.stockwise.auth.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -16,8 +23,10 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import com.stockwise.common.config.JwtConfiguration;
 import com.stockwise.common.constant.AuthConstant;
 import com.stockwise.common.exception.CustomException;
+import com.stockwise.common.jwt.JwtVerifier;
 import com.stockwise.common.model.AuthTokenModel;
 
 import lombok.RequiredArgsConstructor;
@@ -118,4 +127,42 @@ public class JwtUtil {
 	private Long getRefreshTokenExpiry() {
 		return Long.parseLong(environment.getProperty(AuthConstant.REFRESH_TOKEN_EXPIRY_MS));
 	}
+
+
+	public static RSAKey loadRsaKeyFromJson(String filePath) throws IOException, ParseException {
+    //    ObjectMapper objectMapper = new ObjectMapper();
+    //     JsonNode rootNode = objectMapper.readTree(new File(filePath));
+
+    //     // Parse the JSON into an RSA key
+    //     RSAKey rsaKey = RSAKey.parse(rootNode.toString());
+        
+    //     return rsaKey;
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    JsonNode rootNode = null;
+    
+    try {
+        // Read the JSON file into a JsonNode
+        rootNode = objectMapper.readTree(new File(filePath));
+    } catch (IOException e) {
+        Logger.getLogger(JwtVerifier.class.getName()).log(Level.SEVERE, "Error reading JSON file: " + filePath, e);
+        throw new IOException("Error reading JWK JSON file", e);
+    }
+
+    // Ensure the rootNode contains the expected structure of a JWK
+    if (rootNode == null || !rootNode.has("kty") || !rootNode.has("n")) {
+        throw new ParseException("Invalid JWK structure: Missing key type or modulus", 0);
+    }
+
+    try {
+        // Parse the root node into an RSAKey
+        RSAKey rsaKey = RSAKey.parse(rootNode.toString());
+
+        // Return the RSA key after successful parsing
+        return rsaKey;
+    } catch (ParseException e) {
+        Logger.getLogger(JwtVerifier.class.getName()).log(Level.SEVERE, "Error parsing JWK JSON into RSAKey", e);
+        throw new ParseException("Error parsing JWK JSON into RSAKey", 0);
+    }
+    }
 }
