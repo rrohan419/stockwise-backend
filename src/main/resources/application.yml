@@ -1,0 +1,43 @@
+# spring:
+#   security:
+#     oauth2:
+#       client:
+#         registration:
+#           google:
+#             client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
+#             client-secret: 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
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google-login:
+            provider: google
+            client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
+            client-secret: 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
+
+# jwt:
+#   config:
+#     enabled: true
+#     jwk-set:
+#       url: "http://localhost:8002/.well-known/jwks.json"
+#       issuer: "STOCKWISE"
+
+access:
+  token:
+    expiry:
+      in:
+        ms: 7200000
+        
+refresh:
+  token:
+    expiry:
+      in:
+        ms: 86400000
+
+# Secrets Manager
+secrets.manager:
+  secret:
+    id: stockwise-secrets
+  region: ap-south-1
