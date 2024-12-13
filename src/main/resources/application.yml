@@ -40,4 +40,4 @@ refresh:
 secrets.manager:
   secret:
     id: stockwise-secrets
-  region: eu-north-1
+  region: ap-south-1
