@@ -1,4 +1,4 @@
-package com.stockwise.common.jwt;
+package com.stockwise.auth.jwt;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -16,12 +16,12 @@ import com.stockwise.common.constant.AppConstant;
 import com.stockwise.common.exception.CustomException;
 
 @Component
-@ConditionalOnProperty(name = AppConstant.JWT_CONFIG_ENABLED, havingValue = AppConstant.TRUE)
+// @ConditionalOnProperty(name = AppConstant.JWT_CONFIG_ENABLED, havingValue = AppConstant.TRUE)
 public class JwtVerifier {
     
     private final JWKSet jwkSet;
 
-    public JwtVerifier(JWKSet jwkSet) {
+    JwtVerifier(JWKSet jwkSet) {
 		this.jwkSet = jwkSet;
 	}
 

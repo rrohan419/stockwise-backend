@@ -25,9 +25,6 @@ public class stockwiseJwtVerifier {
 		this.jwkSet = jwkSet;
 	}
 
-	/**
-	 * @author Mindbowser | rohit.kavthekar@mindbowser.com
-	 */
 	public JWTClaimsSet verifyAndGetClaims(String token) {
 		try {
 			// Parse the JWT token

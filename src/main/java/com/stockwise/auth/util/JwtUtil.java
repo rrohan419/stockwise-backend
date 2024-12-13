@@ -23,10 +23,9 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
-import com.stockwise.common.config.JwtConfiguration;
+import com.stockwise.auth.jwt.JwtVerifier;
 import com.stockwise.common.constant.AuthConstant;
 import com.stockwise.common.exception.CustomException;
-import com.stockwise.common.jwt.JwtVerifier;
 import com.stockwise.common.model.AuthTokenModel;
 
 import lombok.RequiredArgsConstructor;

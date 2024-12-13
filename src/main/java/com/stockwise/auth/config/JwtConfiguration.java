@@ -1,4 +1,4 @@
-package com.stockwise.common.config;
+package com.stockwise.auth.config;
 
 import java.net.URI;
 import java.net.URL;
@@ -7,6 +7,7 @@ import java.text.ParseException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 
@@ -26,6 +27,7 @@ public class JwtConfiguration {
     private final Environment env;
 
     @Bean("stockwiseJwkSet")
+    @Primary
     JWKSet stockwiseJwkSet() {
         JWKSet jwkSet = null;
         try {

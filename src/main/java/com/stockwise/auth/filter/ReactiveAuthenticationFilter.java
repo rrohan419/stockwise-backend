@@ -1,4 +1,4 @@
-package com.stockwise.common.filter;
+package com.stockwise.auth.filter;
 
 import java.text.ParseException;
 import java.util.Collections;
@@ -17,9 +17,9 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
+import com.stockwise.auth.jwt.JwtVerifier;
 import com.stockwise.common.constant.AppConstant;
 import com.stockwise.common.exception.CustomException;
-import com.stockwise.common.jwt.JwtVerifier;
 
 import reactor.core.publisher.Mono;
 

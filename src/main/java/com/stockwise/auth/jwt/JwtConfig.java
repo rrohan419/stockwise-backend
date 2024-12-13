@@ -1,4 +1,4 @@
-package com.stockwise.common.jwt;
+package com.stockwise.auth.jwt;
 
 import java.text.ParseException;
 
