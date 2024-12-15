@@ -5,9 +5,7 @@ import java.text.ParseException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -20,13 +18,9 @@ import com.stockwise.common.exception.CustomException;
 @ConditionalOnProperty(name = AppConstant.JWT_CONFIG_ENABLED, havingValue = AppConstant.TRUE)
 public class JwtConfig {
     
-    private final WebClient webClient;
-    private final Environment env;
 	private final AuthService authService;
 
-    public JwtConfig(WebClient.Builder webClientBuilder, Environment environment, AuthService authService) {
-		this.webClient = webClientBuilder.build();
-		this.env = environment;
+    public JwtConfig(AuthService authService) {
 		this.authService = authService;
 	}
 

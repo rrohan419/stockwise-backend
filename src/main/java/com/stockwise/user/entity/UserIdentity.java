@@ -2,7 +2,7 @@ package com.stockwise.user.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.stockwise.common.emuns.Provider;
+import com.stockwise.auth.enums.Provider;
 import com.stockwise.common.entity.BaseEntity;
 
 import jakarta.persistence.Column;

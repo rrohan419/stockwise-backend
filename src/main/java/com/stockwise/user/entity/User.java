@@ -1,5 +1,6 @@
 package com.stockwise.user.entity;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -66,4 +67,13 @@ public class User extends BaseEntity{
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<UserIdentity> userIdentities;
+
+	public String getCommaSeparatedRoles() {
+		if (userRoles == null || userRoles.isEmpty()) {
+			return "";
+		}
+
+		return userRoles.stream().map(userRole -> userRole.getRole().getUserType().name())
+				.collect(Collectors.joining(", "));
+	}
 }

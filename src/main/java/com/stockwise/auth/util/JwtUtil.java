@@ -29,6 +29,7 @@ import com.stockwise.common.exception.CustomException;
 import com.stockwise.common.model.AuthTokenModel;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 /**
  * Utility class for generating JWT tokens.
@@ -51,12 +52,12 @@ public class JwtUtil {
 	 * @param authorities the authorities associated with the token
 	 * @return {@link AuthTokenModel}
 	 */
-	public AuthTokenModel generateToken(String subject, String authorities, String uuid) {
+	public Mono<AuthTokenModel> generateToken(String subject, String authorities, String uuid) {
 
 		String accessToken = generateSignedToken(subject, authorities, getAccessTokenExpiry(), uuid);
 		String refreshToken = generateSignedToken(subject, null, getRefreshTokenExpiry(), uuid);
 
-		return new AuthTokenModel(accessToken, refreshToken, AuthConstant.BEARER.trim());
+		return  Mono.just(new AuthTokenModel(accessToken, refreshToken, AuthConstant.BEARER.trim()));
 	}
 
 	/**
