@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "stockwise.jwk.set.private.key",
+    "type": "java.lang.String",
+    "description": "A description for 'stockwise.jwk.set.private.key'"
+  },
+  {
+    "name": "stockwise.jwk.set.public.key.\\\"keys\\\"",
+    "type": "java.lang.String",
+    "description": "A description for 'stockwise.jwk.set.public.key.\\\"keys\\\"'"
+  },
+  {
+    "name": "secrets.manager.secret.id",
+    "type": "java.lang.String",
+    "description": "A description for 'secrets.manager.secret.id'"
+  },
+  {
+    "name": "secrets.manager.secret.region",
+    "type": "java.lang.String",
+    "description": "A description for 'secrets.manager.secret.region'"
+  },
+  {
+    "name": "secrets.manager.region",
+    "type": "java.lang.String",
+    "description": "A description for 'secrets.manager.region'"
+  }
+]}

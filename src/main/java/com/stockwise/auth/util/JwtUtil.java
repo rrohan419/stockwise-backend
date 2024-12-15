@@ -56,7 +56,7 @@ public class JwtUtil {
 		String accessToken = generateSignedToken(subject, authorities, getAccessTokenExpiry(), uuid);
 		String refreshToken = generateSignedToken(subject, null, getRefreshTokenExpiry(), uuid);
 
-		return new AuthTokenModel(accessToken, refreshToken, AuthConstant.BEARER.trim());
+		return  new AuthTokenModel(accessToken, refreshToken, AuthConstant.BEARER.trim());
 	}
 
 	/**

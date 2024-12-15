@@ -1,9 +1,10 @@
 package com.stockwise.auth.util;
 
+import java.net.URI;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -23,10 +24,6 @@ import com.stockwise.auth.enums.Provider;
 @Component
 @RequiredArgsConstructor
 public class SsoJwtVerifier {
-    
-    @Qualifier("googlwJwkSet")
-	private final JWKSet googleJwkSet;
-
     private final Mapper mapper;
 
 
@@ -35,7 +32,7 @@ public class SsoJwtVerifier {
 
 		if (provider.equals(Provider.GOOGLE)) {
 
-			claimsSet = verifyAndGetClaims(googleJwkSet, token);
+			claimsSet = verifyAndGetClaims(googleJwkSet(), token);
 
         }
 		return mapper.convert(claimsSet.getClaims(), ProviderModel.class);
@@ -78,4 +75,18 @@ public class SsoJwtVerifier {
 			throw new CustomException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	private JWKSet googleJwkSet() {
+		return fetchJwkByUrl("https://www.googleapis.com/oauth2/v3/certs",
+				"Unable to fetch public key for provider : Google");
+	}
+
+	private JWKSet fetchJwkByUrl(String url, String errorMessage) {
+        try {
+            URL uri = new URI(url).toURL();
+            return JWKSet.load(uri);
+        } catch (Exception ex) {
+            throw new CustomException(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
