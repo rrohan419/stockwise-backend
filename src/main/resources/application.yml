@@ -1,12 +1,3 @@
-# spring:
-#   security:
-#     oauth2:
-#       client:
-#         registration:
-#           google:
-#             client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
-#             client-secret: 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
-
 spring:
   security:
     oauth2:
@@ -16,13 +7,22 @@ spring:
             provider: google
             client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
             client-secret: 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
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stockwise
+    username: postgres
+    password: Postgres@123
 
-# jwt:
-#   config:
-#     enabled: true
-#     jwk-set:
-#       url: "http://localhost:8002/.well-known/jwks.json"
-#       issuer: "STOCKWISE"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
 
 access:
   token:

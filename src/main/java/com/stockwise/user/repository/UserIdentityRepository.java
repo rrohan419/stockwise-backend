@@ -1,11 +1,12 @@
 package com.stockwise.user.repository;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.stockwise.user.entity.UserIdentity;
 
-import reactor.core.publisher.Mono;
 
-public interface UserIdentityRepository extends ReactiveCrudRepository<UserIdentity, Long>{
-    Mono<UserIdentity> findByProviderId(String providerId);
+public interface UserIdentityRepository extends JpaRepository<UserIdentity, Long>{
+    Optional<UserIdentity> findByProviderId(String providerId);
 }

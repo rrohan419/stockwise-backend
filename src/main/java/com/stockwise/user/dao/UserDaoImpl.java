@@ -9,7 +9,6 @@ import com.stockwise.user.entity.User;
 import com.stockwise.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Mono;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     private final UserRepository userRepository;
 
     @Override
-    public Mono<User> saveUser(User user) {
+    public User saveUser(User user) {
        try {
             return userRepository.save(user);
         } catch (Exception e) {
@@ -28,7 +27,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Mono<User> userByEmailAndIsEmailVerified(String email, Boolean isVerified) {
+    public User userByEmailAndIsEmailVerified(String email, Boolean isVerified) {
         return userRepository.findByEmailAndIsEmailVerifiedAndEntityStatus(email, isVerified, EntityStatus.ACTIVE);
     }
     

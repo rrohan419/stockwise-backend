@@ -28,17 +28,6 @@ public class JwtConfig {
 	public JWKSet createJWSSet() {
 
 		try {
-			// // Fetch the JWK set URL and key ID from environment properties
-			// String jwkSetUrl = env.getProperty(AppConstant.JWT_CONFIG_JWK_URL);
-
-			// // Validate the JWK set URL and key ID
-			// if (jwkSetUrl == null || jwkSetUrl.isEmpty()) {
-			// 	throw new CustomException("JWK set URL is not configured or is empty", HttpStatus.BAD_REQUEST);
-			// }
-
-			// // Fetch the JWK Set string from the URL
-			// String jwkSetString = webClient.get().uri(jwkSetUrl).retrieve().bodyToMono(String.class).block();
-
 			String jwkSetString = authService.publicJwkJson();
 
 			// Check if the JWK set string is null or empty

@@ -14,7 +14,6 @@ import com.stockwise.user.dto.SocialSigningDto;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +29,7 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public Mono<ProviderModel> socialSigning(@Valid SocialSigningDto signingDto) {
+    public ProviderModel socialSigning(@Valid SocialSigningDto signingDto) {
         Provider provider = signingDto.getProvider();
     
         return switch (provider) {
@@ -39,14 +38,14 @@ public class AuthServiceImpl implements AuthService{
         };
     }
     
-    private Mono<ProviderModel> handleGoogleSignIn(SocialSigningDto signingDto) {
+    private ProviderModel handleGoogleSignIn(SocialSigningDto signingDto) {
         // Validate the Google token and return the AuthTokenModel
         return validateGoogleToken(ssoJwtVerifier.verifySsoProviderToken(signingDto.getToken(), signingDto.getProvider()));
     }
 
-    private Mono<ProviderModel> validateGoogleToken(ProviderModel providerModel) {
+    private ProviderModel validateGoogleToken(ProviderModel providerModel) {
 		validateIssuer(providerModel, "https://accounts.google.com");
-		return Mono.just(providerModel);
+		return providerModel;
 	}
 
     private void validateIssuer(ProviderModel providerModel, String expectedIssuer) {

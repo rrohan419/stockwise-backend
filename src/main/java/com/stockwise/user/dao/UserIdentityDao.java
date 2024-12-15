@@ -1,13 +1,13 @@
 package com.stockwise.user.dao;
 
 
-import com.stockwise.user.entity.UserIdentity;
+import java.util.Optional;
 
-import reactor.core.publisher.Mono;
+import com.stockwise.user.entity.UserIdentity;
 
 public interface UserIdentityDao {
     
-    Mono<UserIdentity> userIdentityByProvider(String providerId);
+    Optional<UserIdentity> optionalUserIdentity(String providerId);
 
-    Mono<UserIdentity> saveUserIdentity(UserIdentity userIdentity);
+    UserIdentity saveUserIdentity(UserIdentity userIdentity);
 }
