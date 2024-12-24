@@ -16,12 +16,12 @@ import com.stockwise.common.constant.AuthConstant;
 import com.stockwise.common.exception.CustomException;
 
 @Component
-public class stockwiseJwtVerifier {
+public class StockwiseJwtVerifier {
     
     private final JWKSet jwkSet;
 
 
-    public stockwiseJwtVerifier(@Qualifier("stockwiseJwkSet") JWKSet jwkSet) {
+    public StockwiseJwtVerifier(@Qualifier("stockwiseJwkSet") JWKSet jwkSet) {
 		this.jwkSet = jwkSet;
 	}
 
