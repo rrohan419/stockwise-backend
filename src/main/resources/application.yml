@@ -1,12 +1,12 @@
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google-login:
-            provider: google
-            client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
-            client-secret: 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
+#   security:
+#     oauth2:
+#       client:
+#         registration:
+#           google-login:
+#             provider: google
+#             client-id: 954024777360-lju1esfmeo6vuovpfv03604vs600uc1i.apps.googleusercontent.com
+#             client-secret: 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
   datasource:
     url: jdbc:postgresql://localhost:5432/stockwise
     username: postgres

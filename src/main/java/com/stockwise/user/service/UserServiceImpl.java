@@ -16,11 +16,16 @@ import com.stockwise.common.constant.ExceptionMessage;
 import com.stockwise.common.exception.CustomException;
 import com.stockwise.common.model.AuthTokenModel;
 import com.stockwise.common.model.ProviderModel;
+import com.stockwise.user.dao.RoleDao;
 import com.stockwise.user.dao.UserDao;
 import com.stockwise.user.dao.UserIdentityDao;
+import com.stockwise.user.dao.UserRoleDao;
 import com.stockwise.user.dto.SocialSigningDto;
+import com.stockwise.user.entity.Role;
 import com.stockwise.user.entity.User;
 import com.stockwise.user.entity.UserIdentity;
+import com.stockwise.user.entity.UserRole;
+import com.stockwise.user.enums.UserType;
 import com.stockwise.user.model.TokenRequest;
 
 import jakarta.validation.Valid;
@@ -35,6 +40,8 @@ public class UserServiceImpl implements UserService {
     private final UserIdentityDao userIdentityDao;
     private final UserDao userDao;
     private final JwtUtil jwtUtil;
+    private final RoleDao roleDao;
+    private final UserRoleDao userRoleDao;
     private final Environment env;
 
     @Override
@@ -55,12 +62,14 @@ public class UserServiceImpl implements UserService {
 		} else {
 			String email = providerModel.getEmail();
 			user = (email != null) ? userDao.userByEmailAndIsEmailVerified(email, Boolean.TRUE) : null;
-
+            boolean isNewUser = false;
 			if (user == null) {
 				user = buildUserBySocials(email, providerModel.getName());
+                
 				UserIdentity userIdentity = buildUserIdentity(user, null, signingDto.getProvider(), providerId,
                 providerModel.getEmail(), providerModel.getPicture());
 				user.setUserIdentities(Arrays.asList(userIdentity));
+                isNewUser = true;
 			} else {
 				List<UserIdentity> userIdentities = user.getUserIdentities();
 				UserIdentity userIdentity = buildUserIdentity(user, null, signingDto.getProvider(), providerId,
@@ -70,12 +79,26 @@ public class UserServiceImpl implements UserService {
 			}
 
 			user = userDao.saveUser(user);
+            if(isNewUser) {
+                user = addUserRole(UserType.USER, user);
+            }
+             
 		}
 
         TokenRequest builderModel = buildTokenRequest(user, signingDto.getProvider());
 		AuthTokenModel authToken = jwtUtil.generateToken(builderModel.getSubject(), builderModel.getAuthorities(), builderModel.getUserUuid());
 		return authToken;
 
+    }
+
+    private User addUserRole(UserType userType, User user) {
+        Role role = roleDao.roleByUserType(userType);
+
+        UserRole userRole = new UserRole(role,user);
+        userRole = userRoleDao.saveUserRole(userRole);
+
+        user.setUserRoles(List.of(userRole));
+        return userDao.saveUser(user);
     }
 
     private TokenRequest buildTokenRequest(User user, Provider provider) {
